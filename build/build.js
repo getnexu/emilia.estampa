@@ -49,7 +49,7 @@ const compilar = (codigo, nombre) => Babel.transform(codigo, {
     return s.slice(i + a.length, s.indexOf('</script>', i));
   };
   const manifest = JSON.parse(bloque('manifest'));
-  let tpl = aplicar(JSON.parse(bloque('template')), [...require('./patches.json'), ...require('./patches-2.json'), ...require('./patches-3.json'), ...require('./patches-4.json'), ...require('./patches-5.json'), ...require('./patches-6.json')], 'diseño');
+  let tpl = aplicar(JSON.parse(bloque('template')), [...require('./patches.json'), ...require('./patches-2.json'), ...require('./patches-3.json'), ...require('./patches-4.json'), ...require('./patches-5.json'), ...require('./patches-6.json'), ...require('./patches-7.json')], 'diseño');
 
   /* Fotos incrustadas → archivos en /img/ (nombre de la foto original si se conoce). */
   const fotos = new Map();
@@ -80,6 +80,11 @@ const compilar = (codigo, nombre) => Babel.transform(codigo, {
     '}, l)), /*#__PURE__*/React.createElement(__ds_scope.IconButton, {\n    icon: "instagram",\n    label: "Instagram",\n    variant: "bare"\n  }), cta &&',
     '}, l)), /*#__PURE__*/React.createElement("a", { className: "ee-iconbtn ee-iconbtn--bare", href: "https://www.instagram.com/emilia.estampa/", target: "_blank", rel: "noopener", "aria-label": "Instagram de Emilia Estampa", title: "Instagram" }, ' +
     '/*#__PURE__*/React.createElement(__ds_scope.Icon, { name: "instagram", size: 18 })), cta &&',
+  ], [
+    /* Créditos de la web en la última línea del pie de página. */
+    '}, "Administraci\\xF3n"))));',
+    '}, "Administraci\\xF3n")), /*#__PURE__*/React.createElement("span", { className: "ee-footer__credito" }, "Web creada por ", ' +
+    '/*#__PURE__*/React.createElement("a", { href: "https://getnexus.cl", target: "_blank", rel: "noopener" }, "GetNexus"))));',
   ]];
 
   let antes = 0, despues = 0, babelUuid = null, piePuesto = false;
