@@ -1,0 +1,10 @@
+[
+[
+"@media (max-width:374px){\n  .ee-nav__word span{display:none}\n}",
+"@media (max-width:374px){\n  .ee-nav__word span{display:none}\n}\n/* Escritorio y tablet: el menú nunca se parte en dos líneas */\n@media (min-width:768px){\n  .ee-nav__link{white-space:nowrap}\n}\n/* Tablet y escritorio angosto: logo y bolsa arriba, menú completo en la fila de abajo */\n@media (min-width:768px) and (max-width:1239px){\n  .ee-nav__links{order:3;width:100%;margin-left:0;justify-content:flex-end;gap:var(--sp-4)}\n}\n/* Escritorio: todo en una fila y la bolsa al final, a la derecha del menú */\n@media (min-width:1240px){\n  .ee-nav{flex-wrap:nowrap}\n  .ee-nav__end{order:4;margin-left:0}\n}"
+],
+[
+"@media (min-width:960px){\n  .ee-hero3{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:center;min-height:min(86vh,760px);padding:var(--sp-9) var(--gutter)}\n}",
+"@media (min-width:960px){\n  .ee-hero3{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:center;min-height:min(86vh,760px);padding:var(--sp-9) var(--gutter)}\n}\n/* Portada: entre 960 y 1279 px la vitrina 3D tapaba el texto; ahí va debajo, como en tablet */\n@media (min-width:960px) and (max-width:1279px){\n  .ee-hero3{grid-template-columns:minmax(0,1fr);min-height:0;padding:var(--sp-8) var(--gutter) var(--sp-7)}\n}"
+]
+]
