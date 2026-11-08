@@ -1,0 +1,10 @@
+[
+[
+"  .ee-nav__links .ee-iconbtn,.ee-nav__links .ee-btn{display:none}\n}\n\n/* ---------- ProductCard: refinamiento boutique ---------- */",
+"  .ee-nav__links .ee-iconbtn,.ee-nav__links .ee-btn{display:none}\n  /* Móvil: logo a la izquierda y botones a la derecha en una sola fila, alto justo de los botones */\n  .ee-nav{column-gap:var(--sp-3)}\n  .ee-nav__brand{flex:1 1 0;min-width:0;gap:var(--sp-2)}\n  .ee-nav__word{min-width:0}\n  .ee-nav__word b{white-space:nowrap}\n  .ee-nav__word span{font-size:10px;letter-spacing:.12em;white-space:nowrap}\n  .ee-nav__end{flex:none;margin-left:0}\n}\n/* Pantallas angostas: sin espacio para el subtítulo, se oculta en vez de cortarse */\n@media (max-width:374px){\n  .ee-nav__word span{display:none}\n}\n\n/* ---------- ProductCard: refinamiento boutique ---------- */"
+],
+[
+".ee-footer__cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));",
+"/* El pie es un grid de una columna: sin esto se estira al ancho de sus columnas internas y en móvil la página se desplaza hacia el lado */\n.ee-footer{grid-template-columns:minmax(0,1fr)}\n/* Las animaciones de entrada desplazan bloques fuera de pantalla: no deben generar scroll horizontal */\n.ee-app{overflow-x:clip}\n.ee-footer__cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));"
+]
+]

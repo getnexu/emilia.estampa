@@ -49,7 +49,7 @@ const compilar = (codigo, nombre) => Babel.transform(codigo, {
     return s.slice(i + a.length, s.indexOf('</script>', i));
   };
   const manifest = JSON.parse(bloque('manifest'));
-  let tpl = aplicar(JSON.parse(bloque('template')), [...require('./patches.json'), ...require('./patches-2.json'), ...require('./patches-3.json'), ...require('./patches-4.json')], 'diseño');
+  let tpl = aplicar(JSON.parse(bloque('template')), [...require('./patches.json'), ...require('./patches-2.json'), ...require('./patches-3.json'), ...require('./patches-4.json'), ...require('./patches-5.json')], 'diseño');
 
   /* Fotos incrustadas → archivos en /img/ (nombre de la foto original si se conoce). */
   const fotos = new Map();
