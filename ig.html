@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Emilia Estampa · Productos personalizados</title>
+<meta name="description" content="Productos personalizados hechos por encargo en Renca. Pide por WhatsApp, mira el catálogo o revisa cómo pedir.">
+<meta property="og:title" content="Emilia Estampa · Productos personalizados">
+<meta property="og:description" content="Pide por WhatsApp, mira el catálogo o revisa cómo pedir.">
+<meta property="og:image" content="https://www.emiliaestampa.cl/logo-emilia-estampa.png">
+<meta name="theme-color" content="#BD4A76">
+<link rel="icon" href="logo-emilia-estampa.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@400;500&family=Pacifico&display=swap">
+<style>
+  :root {
+    --rosa-50:#FDF3F7; --rosa-100:#FBE6EE; --rosa-200:#F7D4E2; --rosa-300:#EFB4CB; --rosa-600:#BD4A76; --rosa-700:#9E3560; --rosa-800:#7A2549; --rosa-900:#4E1730;
+    --crema-50:#FFFDF8; --crema-100:#FFF8EC; --oro-400:#D8B98C; --carbon-700:#4A3339; --carbon-900:#2B1D22;
+    --font-display:"Cormorant Garamond",Georgia,serif; --font-ui:"Jost","Helvetica Neue",Arial,sans-serif; --font-script:"Pacifico","Brush Script MT",cursive;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--rosa-100); }
+  body { margin: 0; min-height: 100vh; font-family: var(--font-ui); color: var(--carbon-900);
+    background: radial-gradient(120% 90% at 30% 20%, #FDF3F7 0%, #FBE6EE 45%, #F7D4E2 100%) fixed; }
+  main { max-width: 460px; margin: 0 auto; padding: 32px 16px calc(32px + env(safe-area-inset-bottom)); display: grid; gap: 22px; }
+  .marca { display: grid; justify-items: center; gap: 8px; text-align: center; }
+  .marca img { width: 120px; height: auto; mix-blend-mode: multiply; }
+  .marca h1 { margin: 0; font: 500 2.4rem/1.05 var(--font-display); }
+  .marca .script { font: 400 1.5rem/1.2 var(--font-script); color: var(--rosa-600); }
+  .marca p { margin: 0; max-width: 34ch; font-size: 15px; line-height: 1.55; color: var(--carbon-700); }
+  .fotos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .fotos:empty { display: none; }
+  .fotos img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 16px; border: 3px solid var(--crema-50); background: var(--crema-50); box-shadow: 0 18px 32px -20px rgba(78,23,48,.5); display: block; }
+  .botones { display: grid; gap: 12px; }
+  .btn { min-height: 58px; padding: 0 20px; border-radius: 999px; display: flex; align-items: center; justify-content: center; gap: 10px;
+    font: 500 16px/1.2 var(--font-ui); text-decoration: none; text-align: center; color: var(--carbon-900);
+    background: var(--crema-50); border: 1px solid var(--oro-400); box-shadow: 0 3px 0 var(--rosa-200); transition: transform .16s cubic-bezier(.22,.61,.36,1); }
+  .btn:active { transform: translateY(2px) scale(.985); }
+  .btn svg { flex: 0 0 auto; }
+  .btn-wa { background: var(--rosa-600); border-color: var(--rosa-600); color: var(--crema-50); box-shadow: 0 3px 0 var(--rosa-800), 0 16px 30px -16px rgba(78,23,48,.7); }
+  .btn-cat { background: linear-gradient(160deg, var(--rosa-900), var(--carbon-900)); border-color: var(--rosa-900); color: var(--crema-100); box-shadow: 0 3px 0 #1a1114; }
+  .nota { margin: 0; text-align: center; font-size: 13px; line-height: 1.55; color: var(--carbon-700); }
+  .pie { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; font-size: 13px; }
+  .pie a { color: var(--rosa-700); text-decoration: none; }
+  a:focus-visible { outline: 2px solid var(--rosa-700); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<main>
+  <header class="marca">
+    <img src="logo-emilia-estampa.png" alt="Emilia Estampa" onerror="this.remove()">
+    <h1>Emilia Estampa</h1>
+    <span class="script">¿Lo creamos juntas?</span>
+    <p>Productos personalizados hechos por encargo, en familia, desde Renca.</p>
+  </header>
+
+  <div class="fotos" id="fotos" aria-hidden="true"></div>
+
+  <nav class="botones" aria-label="Opciones">
+    <a class="btn btn-wa" href="https://wa.me/56922575539?text=Hola%2C%20Emilia%20Estampa.%20Vengo%20desde%20Instagram%20y%20quiero%20hacer%20un%20pedido%20personalizado." target="_blank" rel="noopener">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+      Pedir por WhatsApp
+    </a>
+    <a class="btn btn-cat" href="/?ir=catalogo">Ver el catálogo</a>
+    <a class="btn" href="/?ir=como-pedir">Cómo pedir en 4 pasos</a>
+    <a class="btn" href="/?ir=faq">Preguntas frecuentes</a>
+  </nav>
+
+  <p class="nota">Pedidos de lunes a viernes hasta las 21:00 · Despacho RM y envíos a regiones</p>
+
+  <footer class="pie">
+    <a href="/">emiliaestampa.cl</a>
+    <a href="https://www.instagram.com/emilia.estampa/" target="_blank" rel="noopener">@emilia.estampa</a>
+    <a href="https://wa.me/56922575539" target="_blank" rel="noopener">+56 9 2257 5539</a>
+  </footer>
+</main>
+<script>
+  /* Tres fotos subidas desde el panel (las fotos @base viven dentro de la página principal) */
+  fetch('/api/catalogo').then(r => r.json()).then(d => {
+    const caja = document.getElementById('fotos');
+    (d.productos || []).filter(p => p.foto && p.foto.startsWith('/api/foto')).slice(0, 3).forEach(p => {
+      const img = document.createElement('img');
+      img.src = p.foto; img.alt = ''; img.loading = 'lazy';
+      caja.appendChild(img);
+    });
+  }).catch(() => {});
+</script>
+</body>
+</html>
