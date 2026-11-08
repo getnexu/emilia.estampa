@@ -42,7 +42,7 @@ async function bajar(nodos, rel) {
     const destino = path.join(rel, nodo.name);
     if (nodo.type === 'directory') { await bajar(nodo.children || [], destino); continue; }
     if (nodo.type !== 'file') continue;
-    const r = await api(`/v7/deployments/${DEPLOY}/files/${nodo.uid}`);
+    const r = await api(`/v8/deployments/${DEPLOY}/files/${nodo.uid}`);
     let buf = Buffer.from(await r.arrayBuffer());
     if ((r.headers.get('content-type') || '').includes('json')) {
       try { const j = JSON.parse(buf.toString('utf8')); if (typeof j.data === 'string') buf = Buffer.from(j.data, 'base64'); } catch {}
