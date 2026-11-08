@@ -1,0 +1,26 @@
+[
+[
+"/* Cursor moderno (solo mouse) */\n@media (pointer:fine){\n  html.ee-cur, html.ee-cur *{cursor:none!important}\n  html.ee-cur input, html.ee-cur textarea, html.ee-cur select{cursor:text!important}\n}",
+"/* Cursor normal del sistema (se quitó el cursor personalizado) */\n.ee-cur-dot,.ee-cur-ring{display:none!important}"
+],
+[
+"<script src=\"3727703b-e73f-48ec-8c51-2cf908dce2de\"></script>\n",
+""
+],
+[
+"const { NavBar, Footer, ShippingNotice, Toast, Button, IconButton, Icon, WhatsappButton } = NS;",
+"const { NavBar, Footer, ShippingNotice, Toast, Button, IconButton, Icon, WhatsappButton, Testimonial, SectionHeading } = NS;"
+],
+[
+"const WA = \"https://wa.me/56922575539\";",
+"const WA = \"https://wa.me/56922575539\";\n\n/* Reseñas reales de clientes. Formato: { texto: \"...\", nombre: \"Nombre\", detalle: \"Producto o comuna\" } */\nconst RESENAS = [];\n\nfunction Opiniones() {\n  return (\n    <section className=\"ee-sec ee-sec--soft ee-band--crema ee-opiniones\" aria-label=\"Opiniones de clientes\">\n      <SectionHeading overline=\"Opiniones\" title=\"Lo que dicen\" script=\"nuestras clientas\" />\n      <div className=\"ee-opiniones__grid\">\n        {RESENAS.map(r => <Testimonial key={r.nombre + r.texto.slice(0, 12)} quote={r.texto} author={r.nombre} meta={r.detalle} />)}\n      </div>\n    </section>\n  );\n}"
+],
+[
+"      {vista === \"Inicio\" && <InstagramSeccion />}",
+"      {vista === \"Inicio\" && RESENAS.length > 0 && <Opiniones />}\n      {vista === \"Inicio\" && <InstagramSeccion />}"
+],
+[
+"@media (prefers-reduced-motion:reduce){.ee-ig__foto{transition:none}}",
+"@media (prefers-reduced-motion:reduce){.ee-ig__foto{transition:none}}\n.ee-opiniones__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:var(--sp-5);width:100%}"
+]
+]

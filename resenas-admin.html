@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Reseñas · Administración Emilia Estampa</title>
+<link rel="icon" href="logo-emilia-estampa.png">
+<style>
+  :root { --rosa-50:#FDF3F7; --rosa-100:#FBE6EE; --rosa-500:#C95C85; --rosa-600:#BD4A76; --rosa-700:#9E3560; --crema-50:#FFFDF8; --crema-300:#E8D8C6; --oro-400:#D8B98C; --carbon-500:#7A6670; --carbon-900:#2B1D22; }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--rosa-50); color: var(--carbon-900); font: 16px/1.5 "Jost", "Helvetica Neue", Arial, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 24px 16px 48px; display: grid; gap: 18px; }
+  h1 { margin: 0; font: 500 1.9rem/1.1 "Cormorant Garamond", Georgia, serif; }
+  .sub { margin: 0; color: var(--carbon-500); font-size: 14px; }
+  .barra { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+  button { font: inherit; cursor: pointer; border-radius: 999px; padding: 8px 16px; border: 1px solid var(--oro-400); background: var(--crema-50); color: var(--carbon-900); }
+  button.on, button.pri { background: var(--rosa-600); border-color: var(--rosa-600); color: var(--crema-50); }
+  button.peligro { border-color: #d9a3b5; color: var(--rosa-700); }
+  button:focus-visible, input:focus-visible { outline: 2px solid var(--rosa-700); outline-offset: 2px; }
+  .tarjeta { background: var(--crema-50); border: 1px solid var(--crema-300); border-radius: 16px; padding: 16px; display: grid; gap: 8px; }
+  .cab { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: baseline; }
+  .estrellas { color: var(--rosa-500); letter-spacing: 2px; }
+  .meta { color: var(--carbon-500); font-size: 13px; }
+  .estado { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; padding: 2px 10px; border-radius: 999px; background: var(--rosa-100); color: var(--rosa-700); }
+  .estado.pub { background: #e3f1e6; color: #2f6b3d; }
+  .texto { margin: 0; white-space: pre-wrap; }
+  .acciones { display: flex; gap: 8px; flex-wrap: wrap; }
+  .login { display: grid; gap: 10px; max-width: 360px; }
+  input { font: inherit; padding: 10px 14px; border: 1px solid var(--oro-400); border-radius: 12px; background: var(--crema-50); }
+  .aviso { color: var(--rosa-700); margin: 0; font-size: 14px; }
+  .vacio { color: var(--carbon-500); }
+  a { color: var(--rosa-700); }
+</style>
+</head>
+<body>
+<main>
+  <div>
+    <h1>Reseñas de clientes</h1>
+    <p class="sub">Las reseñas nuevas quedan pendientes. Solo se ven en la web las que publicas aquí.</p>
+  </div>
+
+  <form class="login" id="login" hidden>
+    <label for="clave">Contraseña del panel</label>
+    <input id="clave" type="password" autocomplete="current-password" required>
+    <button class="pri" type="submit">Entrar</button>
+    <p class="aviso" id="loginError" role="alert"></p>
+  </form>
+
+  <section id="app" hidden>
+    <div class="barra">
+      <div class="tabs" role="tablist">
+        <button type="button" data-f="pendiente" class="on" role="tab">Pendientes</button>
+        <button type="button" data-f="publicada" role="tab">Publicadas</button>
+        <button type="button" data-f="todas" role="tab">Todas</button>
+      </div>
+      <span><a href="/#resenas">Ver en la web</a> · <a href="/panel">Panel</a> · <button type="button" id="salir">Salir</button></span>
+    </div>
+    <p class="aviso" id="error" role="alert"></p>
+    <div id="lista" style="display:grid;gap:12px;margin-top:12px"></div>
+  </section>
+</main>
+<script>
+  /* Usa la misma sesión que el panel de administración (misma contraseña). */
+  const SES = 'ee-admin-sesion';
+  const clave = () => { try { return sessionStorage.getItem(SES) || ''; } catch (e) { return ''; } };
+  let filtro = 'pendiente', resenas = [];
+  const $ = id => document.getElementById(id);
+
+  function api(metodo, ruta, cuerpo) {
+    return fetch(ruta, { method: metodo, cache: 'no-store', headers: { 'Content-Type': 'application/json', 'x-admin-clave': clave() }, body: cuerpo ? JSON.stringify(cuerpo) : undefined })
+      .then(r => r.json().catch(() => ({})).then(j => { if (r.status === 401) { salir(); throw new Error('Sesión vencida. Vuelve a entrar.'); } if (!r.ok || j.ok === false) throw new Error(j.error || 'Error ' + r.status); return j; }));
+  }
+  function cargar() {
+    $('error').textContent = '';
+    return api('GET', '/api/resenas?todas=1').then(j => { resenas = j.resenas || []; pintar(); }).catch(e => { $('error').textContent = e.message; });
+  }
+  function pintar() {
+    const lista = $('lista');
+    lista.textContent = '';
+    const ver = resenas.filter(r => filtro === 'todas' || r.estado === filtro);
+    document.querySelectorAll('[data-f]').forEach(b => {
+      const n = resenas.filter(r => b.dataset.f === 'todas' || r.estado === b.dataset.f).length;
+      b.textContent = { pendiente: 'Pendientes', publicada: 'Publicadas', todas: 'Todas' }[b.dataset.f] + ' (' + n + ')';
+      b.classList.toggle('on', b.dataset.f === filtro);
+    });
+    if (!ver.length) { const p = document.createElement('p'); p.className = 'vacio'; p.textContent = filtro === 'pendiente' ? 'No hay reseñas pendientes.' : 'No hay reseñas aquí.'; lista.append(p); return; }
+    ver.forEach(r => {
+      const t = document.createElement('article'); t.className = 'tarjeta';
+      const cab = document.createElement('div'); cab.className = 'cab';
+      const nom = document.createElement('strong'); nom.textContent = r.nombre;
+      const est = document.createElement('span'); est.className = 'estrellas'; est.textContent = '★'.repeat(r.estrellas) + '☆'.repeat(5 - r.estrellas); est.setAttribute('aria-label', r.estrellas + ' de 5');
+      const meta = document.createElement('span'); meta.className = 'meta'; meta.textContent = (r.producto ? r.producto + ' · ' : '') + new Date(r.fecha).toLocaleString('es-CL', { dateStyle: 'medium', timeStyle: 'short' });
+      const st = document.createElement('span'); st.className = 'estado' + (r.estado === 'publicada' ? ' pub' : ''); st.textContent = r.estado === 'publicada' ? 'Publicada' : 'Pendiente';
+      cab.append(nom, est, meta, st);
+      const txt = document.createElement('p'); txt.className = 'texto'; txt.textContent = r.texto;
+      const acc = document.createElement('div'); acc.className = 'acciones';
+      const boton = (texto, cls, accion, confirmar) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = texto; if (cls) b.className = cls;
+        b.onclick = () => { if (confirmar && !confirm(confirmar)) return; b.disabled = true; api('PUT', '/api/resenas', { id: r.id, accion }).then(cargar).catch(e => { $('error').textContent = e.message; b.disabled = false; }); }; return b; };
+      acc.append(r.estado === 'publicada' ? boton('Ocultar', '', 'ocultar') : boton('Publicar', 'pri', 'publicar'),
+        boton('Borrar', 'peligro', 'borrar', '¿Borrar esta reseña para siempre?'));
+      t.append(cab, txt, acc); lista.append(t);
+    });
+  }
+  function salir() { try { sessionStorage.removeItem(SES); } catch (e) {} $('app').hidden = true; $('login').hidden = false; }
+  function entrarApp() { $('login').hidden = true; $('app').hidden = false; cargar(); }
+
+  $('login').addEventListener('submit', e => {
+    e.preventDefault();
+    const pw = $('clave').value.trim();
+    $('loginError').textContent = '';
+    fetch('/api/login', { method: 'POST', headers: { 'x-admin-clave': pw } }).then(r => {
+      if (!r.ok) throw new Error('Contraseña incorrecta.');
+      try { sessionStorage.setItem(SES, pw); } catch (e) {}
+      $('clave').value = '';
+      entrarApp();
+    }).catch(err => { $('loginError').textContent = err.message; });
+  });
+  document.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { filtro = b.dataset.f; pintar(); }));
+  $('salir').addEventListener('click', salir);
+  if (clave() && clave() !== '1') entrarApp(); else salir();
+</script>
+</body>
+</html>
