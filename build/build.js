@@ -83,8 +83,8 @@ const compilar = (codigo, nombre) => Babel.transform(codigo, {
   ], [
     /* Créditos de la web en la última línea del pie de página. */
     '}, "Administraci\\xF3n"))));',
-    '}, "Administraci\\xF3n")), /*#__PURE__*/React.createElement("span", { className: "ee-footer__credito" }, "Web creada por ", ' +
-    '/*#__PURE__*/React.createElement("a", { href: "https://getnexus.cl", target: "_blank", rel: "noopener" }, "GetNexus"))));',
+    '}, "Administraci\\xF3n")), /*#__PURE__*/React.createElement("span", { className: "ee-footer__credito" }, "P\\xE1gina web creada por ", ' +
+    '/*#__PURE__*/React.createElement("a", { href: "https://getnexus.cl/?utm_source=emiliaestampa&utm_medium=referral&utm_campaign=credito_footer", target: "_blank", rel: "noopener", title: "GetNexus \\xB7 Dise\\xF1o de p\\xE1ginas web y landing pages en Chile" }, "GetNexus"))));',
   ]];
 
   let antes = 0, despues = 0, babelUuid = null, piePuesto = false;
